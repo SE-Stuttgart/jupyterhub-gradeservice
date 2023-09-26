@@ -1,0 +1,35 @@
+{
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/*.egg-info": true
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "isort.args": [
+    "--profile",
+    "black"
+  ],
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "python.formatting.provider": "none",
+  "black-formatter.args": [
+    "--line-length",
+    "100"
+  ],
+  "flake8.args": [
+    "--ignore=E501",
+    "--verbose"
+  ],
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [
+    "-vs"
+  ],
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}
