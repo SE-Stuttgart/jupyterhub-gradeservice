@@ -1,0 +1,193 @@
+{
+  "@jupyterlab/application-extension:context-menu": {
+    "contextMenu": [
+      {
+        "command": "filebrowser:download",
+        "selector": ".jp-DirListing-item[data-isdir=\"false\"]",
+        "disabled": true
+      },
+      {
+        "command": "filebrowser:rename",
+        "selector": ".jp-DirListing-item[data-isdir]",
+        "disabled": true
+      },
+      {
+        "command": "filebrowser:delete",
+        "selector": ".jp-DirListing-item[data-isdir]",
+        "disabled": true
+      },
+      {
+        "command": "filebrowser:cut",
+        "selector": ".jp-DirListing-item[data-isdir]",
+        "disabled": true
+      },
+      {
+        "command": "filebrowser:copy",
+        "selector": ".jp-DirListing-item[data-isdir=\"false\"]",
+        "disabled": true
+      },
+      {
+        "command": "filebrowser:paste",
+        "selector": ".jp-DirListing-content",
+        "disabled": true
+      },
+      {
+        "command": "filebrowser:duplicate",
+        "selector": ".jp-DirListing-item[data-isdir=\"false\"]",
+        "disabled": true
+      }
+    ]
+  },
+  "@jupyterlab/mainmenu-extension:plugin": {
+    "menus": [
+      {
+        "id": "jp-mainmenu-file",
+        "items": [
+          {
+            "command": "docmanager:save-as",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "id": "jp-mainmenu-edit",
+        "items": [
+          {
+            "command": "notebook:move-cell-up",
+            "disabled": true
+          },
+          {
+            "command": "notebook:move-cell-down",
+            "disabled": true
+          },
+          {
+            "command": "notebook:split-cell-at-cursor",
+            "disabled": true
+          },
+          {
+            "command": "notebook:merge-cells",
+            "disabled": true
+          },
+          {
+            "command": "notebook:merge-cell-above",
+            "disabled": true
+          },
+          {
+            "command": "notebook:merge-cell-below",
+            "disabled": true
+          },
+          {
+            "type": "separator",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "disabled": false,
+        "id": "jp-mainmenu-view",
+        "items": [
+          {
+            "command": "application:toggle-presentation-mode",
+            "disabled": true
+          },
+          {
+            "command": "application:toggle-left-area",
+            "disabled": true
+          },
+          {
+            "command": "application:toggle-right-area",
+            "disabled": true
+          },
+          {
+            "command": "notebook:hide-all-cell-code",
+            "disabled": true
+          },
+          {
+            "command": "notebook:hide-all-cell-outputs",
+            "disabled": true
+          },
+          {
+            "command": "notebook:show-all-cell-code",
+            "disabled": true
+          },
+          {
+            "command": "notebook:show-all-cell-outputs",
+            "disabled": true
+          },
+          {
+            "command": "notebook:toggle-render-side-by-side-current",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "disabled": true,
+        "id": "jp-mainmenu-run",
+        "items": [
+          {
+            "command": "notebook:run-cell-and-insert-below",
+            "disabled": true
+          },
+          {
+            "command": "notebook:run-cell",
+            "disabled": true
+          },
+          {
+            "command": "notebook:run-in-console",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "disabled": false,
+        "id": "jp-mainmenu-kernel",
+        "items": [
+          {
+            "command": "notebook:restart-and-run-to-selected",
+            "disabled": true
+          },
+          {
+            "command": "runmenu:restart-and-run-all",
+            "rank": 1.1
+          }
+        ]
+      },
+      {
+        "disabled": false,
+        "id": "jp-mainmenu-tabs",
+        "items": [
+          {
+            "command": "application:activate-next-tab",
+            "disabled": true
+          },
+          {
+            "command": "application:activate-previous-tab",
+            "disabled": true
+          },
+          {
+            "command": "application:activate-next-tab-bar",
+            "disabled": true
+          },
+          {
+            "command": "application:activate-previous-tab-bar",
+            "disabled": true
+          },
+          {
+            "command": "tabsmenu:activate-previously-used-tab",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "disabled": false,
+        "id": "jp-mainmenu-help",
+        "items": [
+          {
+            "command": "help:launch-classic-notebook",
+            "disabled": true
+          }
+        ]
+      }
+    ]
+  }
+}

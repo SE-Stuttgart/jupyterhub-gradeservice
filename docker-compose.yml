@@ -1,0 +1,66 @@
+services:
+  hub-db:
+    image: postgres:alpine3.18
+    container_name: jupyterhub-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: jupyterhub
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+  hub:
+    depends_on:
+      - hub-db
+    links:
+      - hub-db
+    image: jupyterhub
+    build:
+      context: ./jupyterhub
+    container_name: jupyterhub # container name needs to match c.JupyterHub.hub_ip in jupyterhub_config.py
+    restart: unless-stopped
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "data:/data"
+    environment:
+      DOCKER_JUPYTER_IMAGE: jupyterlab
+      DOCKER_NETWORK_NAME: jupyterhub-network
+      POSTGRES_HOST: hub-db
+      POSTGRES_DB: jupyterhub
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JUPYTER_API_TOKEN: ${JUPYTER_API_TOKEN}
+    ports:
+      - "8000:8000"
+
+  gradeservice:
+    image: gradeservice
+    build:
+      context: gradeservice
+    container_name: gradeservice
+    restart: unless-stopped
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      GRADING_TIMEOUT: ${GRADING_TIMEOUT}
+      ASSIGNMENTS_PATH: ${ASSIGNMENTS_PATH}
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "gradeservice_data:/assignments"
+    ports:
+      - "5000:5000"
+
+volumes:
+  data:
+    name: jupyterhub_data
+    driver: local
+  db:
+    name: jupyterhub_db
+    driver: local
+  gradeservice_data:
+    name: gradeservice_data
+    driver: local
+
+networks:
+  default:
+    name: jupyterhub-network

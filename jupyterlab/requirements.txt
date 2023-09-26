@@ -1,0 +1,2 @@
+otter-grader==4.3.3
+jupyterlab-language-pack-de-DE

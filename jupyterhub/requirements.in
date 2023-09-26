@@ -1,0 +1,4 @@
+dockerspawner
+jupyterhub-idle-culler
+psycopg2-binary
+jupyterhub-jwtauthenticator-v2
