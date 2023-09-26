@@ -1,0 +1,15 @@
+.git/
+assignments/
+tests/
+
+**/.DS_Store
+**/.pytest_cache/
+**/__pycache__/
+**/*.egg-info/
+
+.dockerignore
+Dockerfile
+**/*.yml
+**/*.toml
+**/*.md
+**/*.in
