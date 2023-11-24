@@ -35,7 +35,7 @@ c.JupyterHub.hub_ip = "jupyterhub"
 c.JupyterHub.hub_port = 8080
 
 # uncomment the following line if you want to reverse proxy the jupyterhub to /jhub
-# c.JupyterHub.bind_url = "http://:8000/jhub"
+c.JupyterHub.bind_url = "http://:8000/jhub"
 
 c.Spawner.args = [
     "--NotebookApp.allow_origin=*",
