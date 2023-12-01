@@ -18,14 +18,15 @@ services:
     image: jupyterhub
     build:
       context: ./jupyterhub
-    container_name: jupyterhub # container name needs to match c.JupyterHub.hub_ip in jupyterhub_config.py
+    container_name: ${DOCKER_JUPYTER_HUB_CONTAINER_NAME} # container name needs to match c.JupyterHub.hub_ip in jupyterhub_config.py
     restart: unless-stopped
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "data:/data"
     environment:
+      DOCKER_JUPYTER_HUB_CONTAINER_NAME: ${DOCKER_JUPYTER_HUB_CONTAINER_NAME}
       DOCKER_JUPYTER_IMAGE: jupyterlab
-      DOCKER_NETWORK_NAME: jupyterhub-network
+      DOCKER_NETWORK_NAME: ${DOCKER_NETWORK_NAME}
       POSTGRES_HOST: hub-db
       POSTGRES_DB: jupyterhub
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -63,4 +64,4 @@ volumes:
 
 networks:
   default:
-    name: jupyterhub-network
+    name: ${DOCKER_NETWORK_NAME}

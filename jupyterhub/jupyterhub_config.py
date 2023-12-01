@@ -31,7 +31,7 @@ c.DockerSpawner.notebook_dir = notebook_dir
 c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir}
 c.DockerSpawner.remove = True
 
-c.JupyterHub.hub_ip = "jupyterhub"
+c.JupyterHub.hub_ip = os.environ["DOCKER_JUPYTER_HUB_CONTAINER_NAME"]
 c.JupyterHub.hub_port = 8080
 
 # uncomment the following line if you want to reverse proxy the jupyterhub to /jhub

@@ -12,13 +12,14 @@
 
 # KIB3 StuPro SS 2022 Development Team of the University of Stuttgart
 
+
 c = get_config()  # pyright: ignore[reportUndefinedVariable] # noqa: F821
 c.NotebookApp.ip = "0.0.0.0"
 c.NotebookApp.port = 8888
 c.NotebookApp.open_browser = False
 
 # shutdown kernels after no activity for 20 minutes
-c.MappingKernelManager.cull_idle_timeout = 20 * 60
+c.MappingKernelManager.cull_idle_timeout = 1 * 60
 # check for idle kernels every two minutes
 c.MappingKernelManager.cull_interval = 2 * 60
 

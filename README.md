@@ -22,6 +22,13 @@
    - `JWT_SECRET`
    - `API_TOKEN`
 
+1. Make sure to copy these docker names in the [.env](./.env) file, you will need them for setting up the Moodle Plug-in:
+
+   - `DOCKER_JUPYTER_HUB_CONTAINER_NAME`
+   *Docker JupyterHub API Address: http://&lt;container_name&gt;:8000/jhub*
+   - `DOCKER_NETWORK_NAME`
+   *The Moodle Container needs to connect to this Docker Network*
+
 1. Build and start the hub
 
    After the jupyterlab image hase been built and environment variables are set up you can start the JupyterHub:
