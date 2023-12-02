@@ -39,7 +39,7 @@ services:
     image: gradeservice
     build:
       context: gradeservice
-    container_name: gradeservice
+    container_name: ${DOCKER_GRADESERVICE_CONTAINER_NAME}
     restart: unless-stopped
     environment:
       JWT_SECRET: ${JWT_SECRET}
