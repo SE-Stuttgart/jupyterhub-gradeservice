@@ -1,2 +1,10 @@
 otter-grader==4.3.3
 jupyterlab-language-pack-de-DE
+tensorflow
+pandas
+ipykernel
+scikit-learn
+matplotlib
+notebook
+numpy
+scipy

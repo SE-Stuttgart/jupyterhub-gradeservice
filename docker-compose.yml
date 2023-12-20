@@ -10,9 +10,15 @@ services:
     volumes:
       - "db:/var/lib/postgresql/data"
 
+  lab:
+    image: jupyterlab
+    build:
+      context: ./jupyterlab
+
   hub:
     depends_on:
       - hub-db
+      - lab
     links:
       - hub-db
     image: jupyterhub

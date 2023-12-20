@@ -1,5 +1,5 @@
 up:
-	docker build ./jupyterlab -t jupyterlab
+#	docker build ./jupyterlab -t jupyterlab
 	docker compose up -d --build
 
 down:
