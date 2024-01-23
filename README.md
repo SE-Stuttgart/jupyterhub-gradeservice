@@ -56,12 +56,12 @@ Run `docker compose down` if you want to delete the containers. The data volumes
 
 ## Serving over HTTPS
 
-After performing the first setp from previous settings to serve ```Jupyter Hub``` externally, below setps provide securing its acess over HTTPS:
+After performing the first setp from previous settings to serve ```Jupyter Hub``` externally, below setps provides guidance in securing it acess over HTTPS:
 1. You need to enable below Apache modules:
   ```shell
   sudo a2enmod ssl rewrite proxy headers proxy_http proxy_wstunnel
   ```
-1. Now you need to add the below lines at the bottom of your SSL configuration file in between ```<VirtualHost> </VirtualHost>``` for port ```443```. This file is ussally available under ```/etc/apache2/sites-available/default-ssl.conf```.
+2. Now you need to add the below lines at the bottom of your SSL configuration file in between ```<VirtualHost> </VirtualHost>``` for port ```443```. This file is ussally available under ```/etc/apache2/sites-available/default-ssl.conf```.
 
 ```shell
   RewriteEngine On
@@ -85,11 +85,12 @@ After performing the first setp from previous settings to serve ```Jupyter Hub``
 
 ***Note:*** make sure to adjust the ports accordingly and restart your Apache service.
 
-1. Now you need to change the ```c.JupyterHub.hub_port``` variable to ```443``` in the following file (if you do this after already starting the Docker containers, a restart of the containers is required):
+3. Now you need to change the ```c.JupyterHub.hub_port``` variable to ```443``` in the following file (if you do this after already starting the Docker containers, a restart of the containers is required):
 
    - [jupyterhub_config.py](./jupyterhub/jupyterhub_config.py?plain=1#L42)
   
-1. To integration within Moodle with ```HTTPS``` check its documentation on
+4. To integration within Moodle over ```HTTPS``` check out the [JupyterHub ULR](https://github.com/SE-Stuttgart/moodle-mod_jupyter/blob/main/README.md) section of the plug-in documentation.
+
 ## Testing
 
 The JupyterHub and Gradeservice API use a json web tokens for authentication.
