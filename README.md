@@ -85,11 +85,15 @@ After performing the first setp from previous settings to serve ```Jupyter Hub``
 
 ***Note:*** make sure to adjust the ports accordingly and restart your Apache service.
 
-3. Now you need to change the ```c.JupyterHub.hub_port``` variable to ```443``` in the following file (if you do this after already starting the Docker containers, a restart of the containers is required):
+3. Uncomment below line in [jupyterhub_config.py](./jupyterhub/jupyterhub_config.py?plain=1#L42)
+
+- ```c.JupyterHub.bind_url = "http://:8000/jhub"```
+
+4. Now you need to change the ```c.JupyterHub.hub_port``` variable to ```443``` in the following file (if you do this after already starting the Docker containers, a restart of the containers is required):
 
    - [jupyterhub_config.py](./jupyterhub/jupyterhub_config.py?plain=1#L42)
   
-4. To integration within Moodle over ```HTTPS``` check out the [JupyterHub ULR](https://github.com/SE-Stuttgart/moodle-mod_jupyter/blob/main/README.md) section of the plug-in documentation.
+5. To integration within Moodle over ```HTTPS``` check out the [JupyterHub ULR](https://github.com/SE-Stuttgart/moodle-mod_jupyter/blob/main/README.md) section of the plug-in documentation.
 
 ## Testing
 
