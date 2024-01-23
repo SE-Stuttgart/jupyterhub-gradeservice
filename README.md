@@ -64,23 +64,23 @@ After performing the first setp from previous settings to serve ```Jupyter Hub``
 2. Now you need to add the below lines at the bottom of your SSL configuration file in between ```<VirtualHost> </VirtualHost>``` for port ```443```. This file is ussally available under ```/etc/apache2/sites-available/default-ssl.conf```.
 
 ```shell
-  RewriteEngine On
-  RewriteCond %{HTTP:Connection} Upgrade [NC]
-  RewriteCond %{HTTP:Upgrade} websocket [NC]
-  RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [P,L]
-  RewriteRule /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [P,L]
-  <Location "/jhub/">
+RewriteEngine On
+RewriteCond %{HTTP:Connection} Upgrade [NC]
+RewriteCond %{HTTP:Upgrade} websocket [NC]
+RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [P,L]
+RewriteRule /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [P,L]
+<Location "/jhub/">
   ProxyPreserveHost on
   ProxyPass         http://127.0.0.1:8000/jhub/
   ProxyPassReverse  http://127.0.0.1:8000/jhub/
   RequestHeader     set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
-  </Location>
-  <Location "/gradeservice/">
+</Location>
+<Location "/gradeservice/">
   ProxyPreserveHost on
   ProxyPass         http://127.0.0.1:5000/
-  ProxyPassReverse  http://127.0.0.1:5000/
+ ProxyPassReverse  http://127.0.0.1:5000/
   RequestHeader     set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
-  </Location>
+</Location>
 ```
 
 ***Note:*** make sure to adjust the ports accordingly and restart your Apache service.
