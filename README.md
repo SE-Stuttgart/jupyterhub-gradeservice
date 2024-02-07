@@ -6,7 +6,7 @@
 
    - [jupyterhub_config.py](./jupyterhub/jupyterhub_config.py?plain=1#L42)
    - [jupyter_notebook_config.py](./jupyterlab/jupyter_notebook_config.py?plain=1#L25)
-
+  
 1. Build the jupyterlab image
 
    ```shell
@@ -53,6 +53,47 @@
 - You can change this in the [docker-compose.yml](./docker-compose.yml).
 
 Run `docker compose down` if you want to delete the containers. The data volumes are not affected by this. If you want to delete these aswell run `docker volume prune` after you executed `docker compose down` (this deletes ALL unused volumes, not just the jupyterhub volumes).
+
+## Serving over HTTPS
+
+After performing the first setp from previous settings to serve ```Jupyter Hub``` externally, below setps provides guidance in securing it acess over HTTPS:
+1. You need to enable below Apache modules:
+  ```shell
+  sudo a2enmod ssl rewrite proxy headers proxy_http proxy_wstunnel
+  ```
+2. Now you need to add the below lines at the bottom of your SSL configuration file in between ```<VirtualHost> </VirtualHost>``` for port ```443```. This file is ussally available under ```/etc/apache2/sites-available/default-ssl.conf```.
+
+```shell
+RewriteEngine On
+RewriteCond %{HTTP:Connection} Upgrade [NC]
+RewriteCond %{HTTP:Upgrade} websocket [NC]
+RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [P,L]
+RewriteRule /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [P,L]
+<Location "/jhub/">
+  ProxyPreserveHost on
+  ProxyPass         http://127.0.0.1:8000/jhub/
+  ProxyPassReverse  http://127.0.0.1:8000/jhub/
+  RequestHeader     set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+</Location>
+<Location "/gradeservice/">
+  ProxyPreserveHost on
+  ProxyPass         http://127.0.0.1:5000/
+ ProxyPassReverse  http://127.0.0.1:5000/
+  RequestHeader     set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+</Location>
+```
+
+***Note:*** make sure to adjust the ports accordingly and restart your Apache service.
+
+3. Uncomment below line in [jupyterhub_config.py](./jupyterhub/jupyterhub_config.py?plain=1#L42)
+
+- ```c.JupyterHub.bind_url = "http://:8000/jhub"```
+
+4. Now you need to change the ```c.JupyterHub.hub_port``` variable to ```443``` in the following file (if you do this after already starting the Docker containers, a restart of the containers is required):
+
+   - [jupyterhub_config.py](./jupyterhub/jupyterhub_config.py?plain=1#L42)
+  
+5. To integration within Moodle over ```HTTPS``` check out the [JupyterHub ULR](https://github.com/SE-Stuttgart/moodle-mod_jupyter/blob/main/README.md) section of the plug-in documentation.
 
 ## Testing
 
